@@ -1,0 +1,43 @@
+{
+  "name": "@lfraja/server",
+  "version": "0.0.1",
+  "author": "Alaa Zorkane <contact@alaazorkane.com>",
+  "main": "index.ts",
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "dev": "tsc-watch --onSuccess \"node ./dist/index.js\"",
+    "generate": "prisma generate",
+    "migrate:up": "prisma migrate up --experimental",
+    "migrate:save": "prisma migrate save --experimental",
+    "studio": "prisma studio --experimental"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^2.5.1",
+    "apollo-server": "^2.17.0",
+    "dotenv-safe": "^8.2.0",
+    "graphql": "^15.3.0",
+    "graphql-fields": "^2.0.3",
+    "graphql-type-json": "^0.3.2",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.0.0"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.5.1",
+    "@types/graphql-fields": "^1.3.3",
+    "@types/node": "^14.6.2",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "module-alias": "^2.2.2",
+    "prettier": "^2.1.1",
+    "tsc-watch": "^4.2.9",
+    "typegraphql-prisma": "^0.6.0",
+    "typescript": "^4.0.2"
+  },
+  "_moduleAliases": {
+    "@": "dist"
+  }
+}
