@@ -1,5 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import { ExpressContext } from "apollo-server-express/dist/ApolloServer";
 
-export interface ReqContext {
-  prisma: PrismaClient;
+export interface MyRequest extends Express.Request {
+  session: MiyouSession;
+}
+
+export interface MyExpressContext extends ExpressContext {
+  req: MyRequest;
 }
