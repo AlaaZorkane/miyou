@@ -1,15 +1,15 @@
-import "module-alias";
+import "module-alias/register";
 import "reflect-metadata";
 import { ApolloServer } from "apollo-server";
 import { buildSchema } from "type-graphql";
 import path from "path";
-import { UserCrudResolver } from "./generated/type-graphql";
 import { ReqContext } from "./types";
 import { PrismaClient } from "@prisma/client";
+import { UserResolver } from "./resolvers/User/UserResolver";
 
 async function main() {
   const schema = await buildSchema({
-    resolvers: [UserCrudResolver],
+    resolvers: [UserResolver],
     emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),
     validate: false,
   });
