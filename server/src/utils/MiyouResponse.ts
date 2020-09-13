@@ -4,7 +4,4 @@ import { Field, ObjectType } from "type-graphql";
 export class MiyouResponse {
   @Field({ nullable: true })
   error?: string;
-
-  @Field({ nullable: true })
-  success: boolean;
 }

@@ -21,7 +21,7 @@ class UserResponse extends MiyouResponse {
   user?: User;
 }
 
-@Resolver()
+@Resolver(() => User)
 export class UserResolver {
   @Authorized()
   @Query(() => UserResponse, {
@@ -30,18 +30,13 @@ export class UserResolver {
   async me(@Ctx() { prisma, userId }: MiyouContext): Promise<UserResponse> {
     const user = await prisma.user.findOne({ where: { id: userId } });
     if (!user) throw new Error(ERRORS.NOT_FOUND);
-    return { user, success: true };
+    return { user };
   }
 
   @Query(() => [User])
   async users(@Ctx() { prisma }: MiyouContext): Promise<User[] | null> {
-    try {
-      const users = await prisma.user.findMany();
-      return users;
-    } catch (err) {
-      console.error(err);
-      return null;
-    }
+    const users = await prisma.user.findMany();
+    return users;
   }
 
   @Mutation(() => UserResponse, { description: "Creates a new user" })
@@ -49,16 +44,11 @@ export class UserResolver {
     @Arg("data") { username, password }: RegisterInput,
     @Ctx() { prisma }: MiyouContext,
   ): Promise<UserResponse> {
-    try {
-      const hashedPassword = await argon.hash(password);
-      const user = await prisma.user.create({
-        data: { username, password: hashedPassword },
-      });
-      return { user, success: true };
-    } catch (err) {
-      console.error(err);
-      return { error: ERRORS.UNKNOWN, success: false };
-    }
+    const hashedPassword = await argon.hash(password);
+    const user = await prisma.user.create({
+      data: { username, password: hashedPassword },
+    });
+    return { user };
   }
 
   @Query(() => UserResponse)
@@ -73,6 +63,6 @@ export class UserResolver {
     const isValid = await argon.verify(user.password, password);
     if (!isValid) throw new Error("Wront password");
     ctx.req.session.userId = user.id;
-    return { user, success: true };
+    return { user };
   }
 }

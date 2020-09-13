@@ -27,13 +27,8 @@ export class ChannelResolver {
     @Arg("data") { name }: CreateChannelInput,
     @Ctx() { prisma }: MiyouContext,
   ): Promise<ChannelResponse> {
-    try {
-      const channel = await prisma.channel.create({ data: { name } });
-      if (!channel) throw new Error(ERRORS.UNKNOWN);
-      return { channel, success: true };
-    } catch (error) {
-      return { error, success: false };
-    }
+    const channel = await prisma.channel.create({ data: { name } });
+    return { channel };
   }
 
   @Authorized()
@@ -42,17 +37,13 @@ export class ChannelResolver {
     @Arg("data") { channelId }: JoinChannelInput,
     @Ctx() { prisma, userId }: MiyouContext,
   ): Promise<ChannelResponse> {
-    try {
-      const channel = await prisma.user
-        .update({
-          where: { id: userId },
-          data: { Channel: { connect: { id: channelId } } },
-        })
-        .Channel();
-      if (!channel) throw new Error(ERRORS.NOT_FOUND);
-      return { channel, success: true };
-    } catch (error) {
-      return { error, success: false };
-    }
+    const channel = await prisma.user
+      .update({
+        where: { id: userId },
+        data: { Channel: { connect: { id: channelId } } },
+      })
+      .Channel();
+    if (!channel) throw new Error(ERRORS.NOT_FOUND);
+    return { channel };
   }
 }

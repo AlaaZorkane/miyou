@@ -14,6 +14,7 @@ import connectRedis from "connect-redis";
 import { MiyouContext } from "./types/miyou";
 import { AuthGuard } from "./utils/AuthGuard";
 import { ChannelResolver } from "./resolvers/Channel/ChannelResolver";
+import { ErrorInterceptor } from "./utils/Middlewares";
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ async function main() {
     emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),
     validate: false,
     authChecker: AuthGuard,
+    globalMiddlewares: [ErrorInterceptor],
   });
 
   const redisClient = redis.createClient({
