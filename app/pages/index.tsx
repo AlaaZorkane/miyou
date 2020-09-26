@@ -1,17 +1,11 @@
-import React from "react";
-import { Login } from "@/components/Login";
+import withAuthentication from "@/lib/withAuthentication";
 
 function IndexPage(): JSX.Element {
   return (
-    <article
-      style={{
-        background: "url(/assets/background.png)",
-      }}
-      className="h-screen grid grid-cols-2 bg-auto bg-no-repeat text-white overflow-hidden"
-    >
-      <Login />
+    <article className="h-screen grid grid-cols-2 bg-auto bg-no-repeat">
+      asdasd
     </article>
   );
 }
 
-export default IndexPage;
+export default withAuthentication(IndexPage);

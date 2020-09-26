@@ -51,7 +51,7 @@ export class UserResolver {
     return { user };
   }
 
-  @Query(() => UserResponse)
+  @Mutation(() => UserResponse)
   async login(
     @Arg("data") { username, password }: LoginInput,
     @Ctx() { prisma, ctx }: MiyouContext,
@@ -61,7 +61,7 @@ export class UserResolver {
     });
     if (!user) throw new Error("User not found");
     const isValid = await argon.verify(user.password, password);
-    if (!isValid) throw new Error("Wront password");
+    if (!isValid) throw new Error("Wrong password");
     ctx.req.session.userId = user.id;
     return { user };
   }

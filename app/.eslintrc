@@ -13,6 +13,10 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
-    "prettier/prettier": ["error", {}, { "usePrettierrc": true }]
+    "prettier/prettier": ["warn", {}, { "usePrettierrc": true }],
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }
