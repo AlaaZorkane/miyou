@@ -52,13 +52,17 @@ async function main() {
   app.use(
     session({
       store: new RedisStore({ client: redisClient }),
+      name: "sid",
       secret: process.env.REDIS_SECRET as string,
       resave: false,
       saveUninitialized: true,
     }),
   );
 
-  server.applyMiddleware({ app });
+  server.applyMiddleware({
+    app,
+    cors: { credentials: true, origin: "http://localhost:3000" },
+  });
 
   app.listen({ port: 4000 }, () =>
     console.log(

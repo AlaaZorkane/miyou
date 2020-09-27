@@ -65,4 +65,15 @@ export class UserResolver {
     ctx.req.session.userId = user.id;
     return { user };
   }
+
+  @Mutation(() => Boolean)
+  logout(@Ctx() { ctx }: MiyouContext): Promise<boolean> {
+    return new Promise((res) => {
+      ctx.req.session.destroy((err) => {
+        ctx.res.clearCookie("sid");
+        if (err) return res(false);
+        return res(true);
+      });
+    });
+  }
 }

@@ -42,6 +42,7 @@ export type Mutation = {
   /** Creates a new user */
   register: UserResponse;
   login: UserResponse;
+  logout: Scalars["Boolean"];
   /** Generate new channel */
   create: ChannelResponse;
   /** Joins a channel */
@@ -108,6 +109,22 @@ export type JoinChannelInput = {
   channelId: Scalars["String"];
 };
 
+export type LoginUserMutationVariables = Exact<{
+  username: Scalars["String"];
+  password: Scalars["String"];
+}>;
+
+export type LoginUserMutation = { __typename?: "Mutation" } & {
+  login: { __typename?: "UserResponse" } & Pick<UserResponse, "error">;
+};
+
+export type LogoutUserMutationVariables = Exact<{ [key: string]: never }>;
+
+export type LogoutUserMutation = { __typename?: "Mutation" } & Pick<
+  Mutation,
+  "logout"
+>;
+
 export type GetMeQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetMeQuery = { __typename?: "Query" } & {
@@ -118,64 +135,6 @@ export type GetMeQuery = { __typename?: "Query" } & {
   };
 };
 
-export type LoginUserMutationVariables = Exact<{
-  username: Scalars["String"];
-  password: Scalars["String"];
-}>;
-
-export type LoginUserMutation = { __typename?: "Mutation" } & {
-  login: { __typename?: "UserResponse" } & Pick<UserResponse, "error">;
-};
-
-export const GetMeDocument = gql`
-  query GetMe {
-    me {
-      user {
-        username
-        id
-        createdAt
-      }
-    }
-  }
-`;
-
-/**
- * __useGetMeQuery__
- *
- * To run a query within a React component, call `useGetMeQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetMeQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetMeQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetMeQuery, GetMeQueryVariables>
-) {
-  return Apollo.useQuery<GetMeQuery, GetMeQueryVariables>(
-    GetMeDocument,
-    baseOptions
-  );
-}
-export function useGetMeLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<GetMeQuery, GetMeQueryVariables>
-) {
-  return Apollo.useLazyQuery<GetMeQuery, GetMeQueryVariables>(
-    GetMeDocument,
-    baseOptions
-  );
-}
-export type GetMeQueryHookResult = ReturnType<typeof useGetMeQuery>;
-export type GetMeLazyQueryHookResult = ReturnType<typeof useGetMeLazyQuery>;
-export type GetMeQueryResult = Apollo.QueryResult<
-  GetMeQuery,
-  GetMeQueryVariables
->;
 export const LoginUserDocument = gql`
   mutation LoginUser($username: String!, $password: String!) {
     login(data: { username: $username, password: $password }) {
@@ -224,4 +183,100 @@ export type LoginUserMutationResult = Apollo.MutationResult<LoginUserMutation>;
 export type LoginUserMutationOptions = Apollo.BaseMutationOptions<
   LoginUserMutation,
   LoginUserMutationVariables
+>;
+export const LogoutUserDocument = gql`
+  mutation LogoutUser {
+    logout
+  }
+`;
+export type LogoutUserMutationFn = Apollo.MutationFunction<
+  LogoutUserMutation,
+  LogoutUserMutationVariables
+>;
+
+/**
+ * __useLogoutUserMutation__
+ *
+ * To run a mutation, you first call `useLogoutUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLogoutUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [logoutUserMutation, { data, loading, error }] = useLogoutUserMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLogoutUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    LogoutUserMutation,
+    LogoutUserMutationVariables
+  >
+) {
+  return Apollo.useMutation<LogoutUserMutation, LogoutUserMutationVariables>(
+    LogoutUserDocument,
+    baseOptions
+  );
+}
+export type LogoutUserMutationHookResult = ReturnType<
+  typeof useLogoutUserMutation
+>;
+export type LogoutUserMutationResult = Apollo.MutationResult<
+  LogoutUserMutation
+>;
+export type LogoutUserMutationOptions = Apollo.BaseMutationOptions<
+  LogoutUserMutation,
+  LogoutUserMutationVariables
+>;
+export const GetMeDocument = gql`
+  query GetMe {
+    me {
+      user {
+        username
+        id
+        createdAt
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetMeQuery__
+ *
+ * To run a query within a React component, call `useGetMeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMeQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetMeQuery, GetMeQueryVariables>
+) {
+  return Apollo.useQuery<GetMeQuery, GetMeQueryVariables>(
+    GetMeDocument,
+    baseOptions
+  );
+}
+export function useGetMeLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetMeQuery, GetMeQueryVariables>
+) {
+  return Apollo.useLazyQuery<GetMeQuery, GetMeQueryVariables>(
+    GetMeDocument,
+    baseOptions
+  );
+}
+export type GetMeQueryHookResult = ReturnType<typeof useGetMeQuery>;
+export type GetMeLazyQueryHookResult = ReturnType<typeof useGetMeLazyQuery>;
+export type GetMeQueryResult = Apollo.QueryResult<
+  GetMeQuery,
+  GetMeQueryVariables
 >;

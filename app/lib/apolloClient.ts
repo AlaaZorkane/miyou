@@ -5,7 +5,6 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from "@apollo/client";
-import { concatPagination } from "@apollo/client/utilities";
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
@@ -14,17 +13,9 @@ function createApolloClient() {
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
       uri: "http://localhost:4000/graphql",
-      credentials: "same-origin",
+      credentials: "include",
     }),
-    cache: new InMemoryCache({
-      typePolicies: {
-        Query: {
-          fields: {
-            allPosts: concatPagination(),
-          },
-        },
-      },
-    }),
+    cache: new InMemoryCache(),
   });
 }
 

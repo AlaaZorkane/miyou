@@ -1,10 +1,12 @@
 import { Logo } from "@/components/Logo";
+import { Notice } from "@/components/UI/Notice";
 import { Button } from "@/components/UI/Button";
 import { Input } from "@/components/UI/Input";
 import { useLoginUserMutation } from "@/generated/graphql";
-import React from "react";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import Router from "next/router";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 
 type LoginData = {
   username: string;
@@ -14,6 +16,7 @@ type LoginData = {
 function IndexPage(): JSX.Element {
   const { register, handleSubmit, errors } = useForm<LoginData>();
   const [submitLogin, { loading }] = useLoginUserMutation();
+  const [loginError, setLoginError] = useState<string | null>(null);
   const onSubmit = handleSubmit(async (data) => {
     const { username, password } = data;
     try {
@@ -21,29 +24,24 @@ function IndexPage(): JSX.Element {
       if (!res.data) throw new Error("Something weird happened");
       const { error } = res.data.login;
       if (error) throw new Error(error);
-      console.log(res.data.login);
+      Router.push("/");
     } catch (err) {
-      toast.error(err.message);
+      setLoginError(err.message);
       console.log(err.message);
     }
   });
   return (
-    <article
-      style={{
-        background: "url(/assets/background.png)",
-      }}
-      className="h-screen grid grid-cols-2 bg-auto bg-no-repeat text-white overflow-hidden"
-    >
+    <article className="h-screen grid grid-cols-2">
       <div className="grid col-start-2">
-        <div className="place-self-center">
+        <div className="place-self-center grid w-2/5">
           <header>
             <Logo />
             <h3 className="text-3xl font-thin my-3">Login | Register</h3>
           </header>
-          <form onSubmit={onSubmit} className="grid grid-cols-3 gap-6">
+          <form onSubmit={onSubmit} className="grid gap-6">
             <Input
               errors={errors.username}
-              className="col-span-3"
+              className="w-full"
               required
               placeholder="username"
               name="username"
@@ -51,14 +49,19 @@ function IndexPage(): JSX.Element {
             />
             <Input
               errors={errors.password}
-              className="col-span-3"
+              className="w-full"
               required
               placeholder="password"
               name="password"
               type="password"
               register={register}
             />
-            <div className="col-span-3 grid grid-cols-2">
+            {loginError && (
+              <Notice className="bg-red-500" icon={faExclamationCircle}>
+                {loginError}
+              </Notice>
+            )}
+            <div className="grid grid-cols-2">
               <Button type="submit" className="col-span-1">
                 {loading ? "loggin in..." : "connect"}
               </Button>
