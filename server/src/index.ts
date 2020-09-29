@@ -13,14 +13,14 @@ import session from "express-session";
 import connectRedis from "connect-redis";
 import { MiyouContext } from "./types/miyou";
 import { AuthGuard } from "./utils/AuthGuard";
-import { ChannelResolver } from "./resolvers/Channel/ChannelResolver";
+import { RoomResolver } from "./resolvers/Channel/RoomResolver";
 import { ErrorInterceptor } from "./utils/Middlewares";
 
 dotenv.config();
 
 async function main() {
   const schema = await buildSchema({
-    resolvers: [UserResolver, ChannelResolver],
+    resolvers: [UserResolver, RoomResolver],
     emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),
     validate: false,
     authChecker: AuthGuard,

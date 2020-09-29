@@ -1,13 +1,13 @@
 import { Field, InputType } from "type-graphql";
 
 @InputType()
-export class CreateChannelInput {
+export class CreateRoomInput {
   @Field()
   name: string;
 }
 
 @InputType()
-export class JoinChannelInput {
+export class JoinRoomInput {
   @Field()
-  channelId: string;
+  roomId: string;
 }

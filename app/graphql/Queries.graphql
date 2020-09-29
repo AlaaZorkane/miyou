@@ -1,9 +1,0 @@
-query GetMe {
-  me {
-    user {
-      username
-      id
-      createdAt
-    }
-  }
-}

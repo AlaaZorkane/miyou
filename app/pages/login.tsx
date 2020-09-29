@@ -36,7 +36,7 @@ function IndexPage(): JSX.Element {
         <div className="place-self-center grid w-2/5">
           <header>
             <Logo />
-            <h3 className="text-3xl font-thin my-3">Login | Register</h3>
+            <h3 className="text-3xl font-thin my-3">Login</h3>
           </header>
           <form onSubmit={onSubmit} className="grid gap-6">
             <Input
@@ -62,8 +62,8 @@ function IndexPage(): JSX.Element {
               </Notice>
             )}
             <div className="grid grid-cols-2">
-              <Button type="submit" className="col-span-1">
-                {loading ? "loggin in..." : "connect"}
+              <Button type="submit" className="col-span-1" isLoading={loading}>
+                connect
               </Button>
               {/* TODO: Make this spawn a forgot password modal */}
               <p role="button" className="underline place-self-end font-thin">

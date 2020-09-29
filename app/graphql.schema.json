@@ -275,7 +275,7 @@
           },
           {
             "name": "create",
-            "description": "Generate new channel",
+            "description": "Generate new room",
             "args": [
               {
                 "name": "data",
@@ -285,7 +285,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "CreateChannelInput",
+                    "name": "CreateRoomInput",
                     "ofType": null
                   }
                 },
@@ -297,7 +297,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "ChannelResponse",
+                "name": "RoomResponse",
                 "ofType": null
               }
             },
@@ -306,7 +306,7 @@
           },
           {
             "name": "join",
-            "description": "Joins a channel",
+            "description": "Joins a room",
             "args": [
               {
                 "name": "data",
@@ -316,7 +316,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "JoinChannelInput",
+                    "name": "JoinRoomInput",
                     "ofType": null
                   }
                 },
@@ -328,7 +328,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "ChannelResponse",
+                "name": "RoomResponse",
                 "ofType": null
               }
             },
@@ -431,7 +431,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ChannelResponse",
+        "name": "RoomResponse",
         "description": null,
         "fields": [
           {
@@ -447,12 +447,12 @@
             "deprecationReason": null
           },
           {
-            "name": "channel",
+            "name": "room",
             "description": null,
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "Channel",
+              "name": "Room",
               "ofType": null
             },
             "isDeprecated": false,
@@ -466,7 +466,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "Channel",
+        "name": "Room",
         "description": null,
         "fields": [
           {
@@ -681,7 +681,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Channel",
+                "name": "Room",
                 "ofType": null
               }
             },
@@ -696,7 +696,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CreateChannelInput",
+        "name": "CreateRoomInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -721,12 +721,12 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "JoinChannelInput",
+        "name": "JoinRoomInput",
         "description": null,
         "fields": null,
         "inputFields": [
           {
-            "name": "channelId",
+            "name": "roomId",
             "description": null,
             "type": {
               "kind": "NON_NULL",

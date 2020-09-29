@@ -6,7 +6,6 @@ export const ErrorInterceptor: MiddlewareFn<MiyouContext> = async (_, next) => {
   try {
     return await next();
   } catch (error) {
-    console.error(error);
     return { error: error.message || ERRORS.UNKNOWN, success: false };
   }
 };

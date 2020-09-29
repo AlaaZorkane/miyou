@@ -1,6 +1,7 @@
 import { Input } from "@/components/UI/Input";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Router from "next/router";
 import { useForm } from "react-hook-form";
 import { Button } from "../UI/Button";
 
@@ -11,7 +12,7 @@ type JoinRoomData = {
 export function JoinRoom({ close }: any): JSX.Element {
   const { register, handleSubmit, errors } = useForm<JoinRoomData>();
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data.roomUrl);
+    Router.push(`/room/${data.roomUrl}`);
   });
 
   return (
@@ -30,6 +31,7 @@ export function JoinRoom({ close }: any): JSX.Element {
           border="border border-black"
           color="text-black"
           register={register}
+          required
           name="roomUrl"
           placeholder="Room ID"
           errors={errors.roomUrl}

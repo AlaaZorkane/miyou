@@ -1,5 +1,5 @@
 import { Field, ObjectType } from "type-graphql";
-import { Channel } from "./Channel";
+import { Room } from "./Room";
 import { User } from "./User";
 
 @ObjectType()
@@ -19,6 +19,6 @@ export class Message {
   @Field()
   updatedAt: Date;
 
-  @Field(() => Channel)
-  channel: Channel;
+  @Field(() => Room)
+  channel: Room;
 }
