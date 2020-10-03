@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
+
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(26, 32, 44) rgb(77, 77, 77);
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: rgb(46, 46, 46);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(26, 32, 44);
+}
+
+.messages-container {
+  height: 570px;
+}
+
 @tailwind utilities;

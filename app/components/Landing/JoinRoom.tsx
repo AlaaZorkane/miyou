@@ -12,6 +12,7 @@ type JoinRoomData = {
 export function JoinRoom({ close }: any): JSX.Element {
   const { register, handleSubmit, errors } = useForm<JoinRoomData>();
   const onSubmit = handleSubmit(async (data) => {
+    console.log(data);
     Router.push(`/room/${data.roomUrl}`);
   });
 
@@ -22,7 +23,11 @@ export function JoinRoom({ close }: any): JSX.Element {
         To join a room, either click on the link that your friend sent you or
         paste down the room id here 👇
       </p>
-      <form onSubmit={onSubmit} className="grid grid-rows-2 gap-3">
+      <form
+        onSubmit={onSubmit}
+        className="grid grid-rows-2 gap-3"
+        autoComplete="off"
+      >
         <Input
           prepend={
             <FontAwesomeIcon icon={faHashtag} size="2x" className="mt-1" />

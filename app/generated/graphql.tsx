@@ -85,9 +85,9 @@ export type Room = {
   __typename?: "Room";
   id: Scalars["String"];
   name: Scalars["String"];
-  members: Array<User>;
+  members?: Maybe<Array<User>>;
   createdAt: Scalars["DateTime"];
-  messages: Array<Message>;
+  messages?: Maybe<Array<Message>>;
   updatedAt: Scalars["DateTime"];
 };
 
@@ -129,12 +129,16 @@ export type JoinRoomMutation = { __typename?: "Mutation" } & {
   join: { __typename?: "RoomResponse" } & Pick<RoomResponse, "error"> & {
       room?: Maybe<
         { __typename?: "Room" } & Pick<Room, "id" | "name"> & {
-            members: Array<{ __typename?: "User" } & Pick<User, "username">>;
-            messages: Array<
-              { __typename?: "Message" } & Pick<
-                Message,
-                "id" | "content" | "createdAt"
-              > & { user: { __typename?: "User" } & Pick<User, "username"> }
+            members?: Maybe<
+              Array<{ __typename?: "User" } & Pick<User, "username">>
+            >;
+            messages?: Maybe<
+              Array<
+                { __typename?: "Message" } & Pick<
+                  Message,
+                  "id" | "content" | "createdAt"
+                > & { user: { __typename?: "User" } & Pick<User, "username"> }
+              >
             >;
           }
       >;

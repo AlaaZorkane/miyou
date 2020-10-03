@@ -20,6 +20,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
     "@zeit/next-css": "^1.0.1",
+    "dayjs": "^1.9.1",
     "framer-motion": "^2.7.5",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
@@ -27,7 +28,8 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-hook-form": "^6.8.2",
-    "reactjs-popup": "^2.0.4"
+    "reactjs-popup": "^2.0.4",
+    "twin.macro": "^1.10.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.17.8",

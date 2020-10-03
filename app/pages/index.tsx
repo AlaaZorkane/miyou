@@ -31,6 +31,7 @@ function IndexPage(): JSX.Element {
       });
       Router.push(`/room/${roomData?.create.room?.id}`);
     } catch (err) {
+      // TODO: show user that something went wrong
       console.log(err);
       console.log(error);
     }
